@@ -59,12 +59,23 @@ onLoggedIn(authData) {
   localStorage.setItem('user', authData.user.Username);
   this.getMovies(authData.token);
 }
+
+logOut() {
+  localStorage.removeItem('token');
+  localStorage.removeItem('user');
+  this.setState({
+    user: null,
+  });
+  console.log('logout successful');
+  alert('You have been successfully logged out');
+  window.open('/', '_self');
+}
   render() {
     const { movies, selectedMovie, user } = this.state;
     /* If there is no user, the LoginView is rendered. If there is a user logged in, the user details are *passed as a prop to the LoginView*/
 
-    if (!user)
-      return <LoginView onLoggedIn={(user) => this.onLoggedIn(user)} />;
+     if (!user)
+       return <LoginView onLoggedIn={(user) => this.onLoggedIn(user)} />;
 
     // Before the movies have been loaded
     if (!movies) return <div className="main-view" />;
@@ -72,6 +83,7 @@ onLoggedIn(authData) {
     return (
       <Router>
         <div className="main-view">
+          
           <Route
             path="/movies/:movieId"
             render={({ match }) => (

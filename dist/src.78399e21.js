@@ -36381,15 +36381,7 @@ var MovieView = /*#__PURE__*/function (_React$Component) {
         className: "label"
       }, "Director: "), _react.default.createElement("span", {
         className: "value"
-      }, movie.Director.Name)), _react.default.createElement(Link, {
-        to: "/directors/".concat(movie.Director.Name)
-      }, _react.default.createElement(Button, {
-        variant: "link"
-      }, "Director")), _react.default.createElement(Link, {
-        to: "/genres/".concat(movie.Genre.Name)
-      }, _react.default.createElement(Button, {
-        variant: "link"
-      }, "Genre")));
+      }, movie.Director.Name)));
     }
   }]);
 
@@ -37798,6 +37790,18 @@ var MainView = /*#__PURE__*/function (_React$Component) {
       this.getMovies(authData.token);
     }
   }, {
+    key: "logOut",
+    value: function logOut() {
+      localStorage.removeItem('token');
+      localStorage.removeItem('user');
+      this.setState({
+        user: null
+      });
+      console.log('logout successful');
+      alert('You have been successfully logged out');
+      window.open('/', '_self');
+    }
+  }, {
     key: "render",
     value: function render() {
       var _this3 = this;
@@ -38033,7 +38037,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50440" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52840" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
