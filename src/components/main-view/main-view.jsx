@@ -7,14 +7,20 @@ import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Container from "react-bootstrap/Container";
 import { BrowserRouter as Router, Route} from "react-router-dom";
+import Navbar from 'react-bootstrap/Navbar';
+import { Link } from 'react-router-dom';
+import Button from 'react-bootstrap/Button';
+import { RegistrationView } from "../registration-view/registration-view";
+
+
 export class MainView extends React.Component {
   constructor() {
     super();
     // Initial state is set to null
     this.state = {
-      movies: null,
-      selectedMovie: null,
-      user: null,
+      movies: [],
+      selectedMovie: '',
+      user: '',
     };
   }
   // One of the "hooks" available in a React Component
@@ -74,15 +80,48 @@ logOut() {
     const { movies, selectedMovie, user } = this.state;
     /* If there is no user, the LoginView is rendered. If there is a user logged in, the user details are *passed as a prop to the LoginView*/
 
-     if (!user)
-       return <LoginView onLoggedIn={(user) => this.onLoggedIn(user)} />;
-
-    // Before the movies have been loaded
-    if (!movies) return <div className="main-view" />;
 
     return (
       <Router>
         <div className="main-view">
+        <Navbar sticky="top" expand="lg" className="mb-2 navbar-styles">
+            <Navbar.Brand className="navbar-brand">
+              <Link to={`/`}>Victorville Film Archives</Link>
+            </Navbar.Brand>
+            <Navbar.Toggle
+              aria-controls="basic-navbar-nav"
+              className="bg-light"
+            />
+            <Navbar.Collapse
+              className="justify-content-end navbar-light"
+              id="basic-navbar-nav"
+            >
+              {!user ? (
+                <ul>
+                  <Link to={`/`}>
+                    <Button variant="link">Login</Button>
+                  </Link>
+                  <Link to={`/register`}>
+                    <Button variant="link">Register</Button>
+                  </Link>
+                </ul>
+              ) : (
+                <ul>
+                  <Link to={`/`}>
+                    <Button variant="link" onClick={() => this.logOut()}>
+                      Log out
+                    </Button>
+                  </Link>
+                  <Link to={`/users/`}>
+                    <Button variant="link">Account</Button>
+                  </Link>
+                  <Link to={`/`}>
+                    <Button variant="link">Movies</Button>
+                  </Link>
+                </ul>
+              )}
+            </Navbar.Collapse>
+          </Navbar>
           
           <Route
             path="/movies/:movieId"
@@ -117,6 +156,7 @@ logOut() {
               return movies.map((m) => <MovieCard key={m._id} movie={m} />);
             }}
           />
+          <Route path="/register" render={() => <RegistrationView />} />
         </div>
       </Router>
     );
