@@ -11,6 +11,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import { Link } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import { RegistrationView } from "../registration-view/registration-view";
+import { ProfileView } from '../profile-view/profile-view';
 
 
 export class MainView extends React.Component {
@@ -112,7 +113,7 @@ logOut() {
                       Log out
                     </Button>
                   </Link>
-                  <Link to={`/users/`}>
+                  <Link to={`/users/${user}`}>
                     <Button variant="link">Account</Button>
                   </Link>
                   <Link to={`/`}>
@@ -157,6 +158,11 @@ logOut() {
             }}
           />
           <Route path="/register" render={() => <RegistrationView />} />
+          <Route
+            exact
+            path="/users/:userId"
+            render={() => <ProfileView movies={movies} />}
+          />
         </div>
       </Router>
     );
