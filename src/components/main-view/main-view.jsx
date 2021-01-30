@@ -12,6 +12,7 @@ import { Link } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import { RegistrationView } from "../registration-view/registration-view";
 import { ProfileView } from '../profile-view/profile-view';
+import { UpdateProfile } from '../update-profile/update-profile';
 
 
 export class MainView extends React.Component {
@@ -162,6 +163,12 @@ logOut() {
             exact
             path="/users/:userId"
             render={() => <ProfileView movies={movies} />}
+          />
+          <Route
+            path="/update/:userId"
+            render={() => {
+              return <UpdateProfile />;
+            }}
           />
         </div>
       </Router>
