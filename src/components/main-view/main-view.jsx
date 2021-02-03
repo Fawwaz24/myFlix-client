@@ -13,9 +13,11 @@ import Button from 'react-bootstrap/Button';
 import { RegistrationView } from "../registration-view/registration-view";
 import { ProfileView } from '../profile-view/profile-view';
 import { UpdateProfile } from '../update-profile/update-profile';
+import { setMovies } from '../../actions/actions';
+import { connect } from 'react-redux';
 
 
-export class MainView extends React.Component {
+class MainView extends React.Component {
   constructor() {
     super();
     // Initial state is set to null
@@ -32,9 +34,7 @@ export class MainView extends React.Component {
     })
     .then(response => {
       // Assign the result to the state
-      this.setState({
-        movies: response.data
-      });
+      this.props.setMovies(response.data);
     })
     .catch(function (error) {
       console.log(error);
@@ -79,7 +79,8 @@ logOut() {
   window.open('/', '_self');
 }
   render() {
-    const { movies, selectedMovie, user } = this.state;
+    let { movies } = this.props;
+    let { user } = this.state;
     /* If there is no user, the LoginView is rendered. If there is a user logged in, the user details are *passed as a prop to the LoginView*/
 
 
@@ -88,7 +89,7 @@ logOut() {
         <div className="main-view">
         <Navbar sticky="top" expand="lg" className="mb-2 navbar-styles">
             <Navbar.Brand className="navbar-brand">
-              <Link to={`/`}>Victorville Film Archives</Link>
+              <Link to={`/`}>myFlix</Link>
             </Navbar.Brand>
             <Navbar.Toggle
               aria-controls="basic-navbar-nav"
@@ -175,3 +176,8 @@ logOut() {
     );
   }
 }
+let mapStateToProps = state => {
+  return { movies: state.movies }
+}
+
+export default connect(mapStateToProps, { setMovies } )(MainView);
