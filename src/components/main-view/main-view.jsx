@@ -15,6 +15,7 @@ import { ProfileView } from '../profile-view/profile-view';
 import { UpdateProfile } from '../update-profile/update-profile';
 import { setMovies } from '../../actions/actions';
 import { connect } from 'react-redux';
+import MoviesList from '../movies-list/movies-list'
 
 
 class MainView extends React.Component {
@@ -148,17 +149,14 @@ logOut() {
               );
             }}
           />
-          <Route
-            exact
-            path="/"
-            render={() => {
-              if (!user)
-                return (
-                  <LoginView onLoggedIn={(user) => this.onLoggedIn(user)} />
-                );
-              return movies.map((m) => <MovieCard key={m._id} movie={m} />);
-            }}
-          />
+         <Route 
+          exact path="/" 
+          render={() => {
+            if (!user) 
+              return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
+              return <MoviesList movies={movies}/>;
+          }} />
+
           <Route path="/register" render={() => <RegistrationView />} />
           <Route
             exact
