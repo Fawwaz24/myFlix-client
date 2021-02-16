@@ -13,6 +13,25 @@ export function RegistrationView(props) {
   const [email, setEmail] = useState('');
   const [birthday, setBirthday] = useState('');
 
+  // const handleRegister = (e) => {
+  //   e.preventDefault();
+  //   axios.post('https://myflixdb-fs.herokuapp.com/users', {
+  //     Username: username,
+  //     Password: password,
+  //     Email: email,
+  //     Birthday: birthday
+  //   })
+  //   .then(response => {
+  //       //console.log(response);
+  //       //console.log(response.data);
+  //       alert("User created successfully");
+  //       window.open("/", "_self");
+  //     })
+  //     .catch((e) => {
+  //       //console.log(e.response);
+  //       console.log("error");
+  //     });
+  // };
   const handleRegister = (e) => {
     e.preventDefault();
     axios.post('https://myflixdb-fs.herokuapp.com/users', {
@@ -22,17 +41,16 @@ export function RegistrationView(props) {
       Birthday: birthday
     })
     .then(response => {
-        console.log(response);
-        console.log(response.data);
-        alert("User created successfully");
-        window.open("/", "_self");
-      })
-      .catch((e) => {
-        console.log(e.response);
-        console.log(e.response.data.errors[0].msg);
-      });
+      const data = response.data;
+      console.log(data);
+      window.open('/', '_self'); // '_self' is necessary so the page will open in the current tab
+      alert('You may now log in');
+    })
+    .catch(e => {
+      console.log(e.response.data)
+      alert(e.response.data)
+    });
   };
-
   return (
     <Container>
       <div className="register-heading">
