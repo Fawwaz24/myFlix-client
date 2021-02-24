@@ -24,6 +24,7 @@ function MoviesList(props) {
   if (!movies) return <div className="main-view" />;
 
   return <div className="movies-list">
+    <VisibilityFilterInput visibilityFilter={visibilityFilter} />
     <Container>
       <Row>
         {/* <Col> */}
@@ -31,7 +32,7 @@ function MoviesList(props) {
         {/* </Col> */}
       </Row>
     </Container>
-    {/* <VisibilityFilterInput visibilityFilter={visibilityFilter} /> */}
+    
     
   </div>;
 }

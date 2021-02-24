@@ -13,25 +13,6 @@ export function RegistrationView(props) {
   const [email, setEmail] = useState('');
   const [birthday, setBirthday] = useState('');
 
-  // const handleRegister = (e) => {
-  //   e.preventDefault();
-  //   axios.post('https://myflixdb-fs.herokuapp.com/users', {
-  //     Username: username,
-  //     Password: password,
-  //     Email: email,
-  //     Birthday: birthday
-  //   })
-  //   .then(response => {
-  //       //console.log(response);
-  //       //console.log(response.data);
-  //       alert("User created successfully");
-  //       window.open("/", "_self");
-  //     })
-  //     .catch((e) => {
-  //       //console.log(e.response);
-  //       console.log("error");
-  //     });
-  // };
   const handleRegister = (e) => {
     e.preventDefault();
     axios.post('https://myflixdb-fs.herokuapp.com/users', {

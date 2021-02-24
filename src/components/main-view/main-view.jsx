@@ -16,7 +16,8 @@ import { UpdateProfile } from '../update-profile/update-profile';
 import { setMovies } from '../../actions/actions';
 import { connect } from 'react-redux';
 import MoviesList from '../movies-list/movies-list'
-
+import {DirectorView} from '../director-view/director-view'
+import {GenreView} from '../genre-view/genre-view'
 
 class MainView extends React.Component {
   constructor() {
@@ -143,8 +144,22 @@ logOut() {
                 <DirectorView
                   director={
                     movies.find((m) => m.Director.Name === match.params.name)
-                      .Director
                   }
+                  movies = {movies}
+                />
+              );
+            }}
+          />
+           <Route
+            path="/genres/:name"
+            render={({ match }) => {
+              if (!movies) return <div className="main-view" />;
+              return (
+                <GenreView
+                  genre={
+                    movies.find((m) => m.Genre.Name === match.params.name)
+                  }
+                  movies = {movies}
                 />
               );
             }}
