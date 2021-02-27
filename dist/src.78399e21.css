@@ -1,3 +1,14 @@
+.movie-card {
+  background-color: black;
+  width: 150px;
+}
+.navbar {
+  background-color: #4E4E45;
+}
+
+body {
+  background-color: gray;
+}
 .my-flix {
   color: steelblue;
 }
