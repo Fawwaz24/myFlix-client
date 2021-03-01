@@ -1,16 +1,21 @@
 .movie-card {
   background-color: black;
-  width: 150px;
+  margin-bottom: 20px;
+  color: white;
 }
 .navbar {
   background-color: #4E4E45;
 }
 
 body {
-  background-color: gray;
+  background-color: red;
 }
 .my-flix {
   color: steelblue;
+}
+
+.container {
+  max-width: 1350px;
 }
 
 /*# sourceMappingURL=/src.78399e21.css.map */
